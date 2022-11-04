@@ -8,8 +8,8 @@
 - The program has been initialized with folder structure using poetry
 
 ## Key takeaways:
-	- General flow of the eigenfaces method for face recognition learned
-	- Better understanding of poetry
+- General flow of the eigenfaces method for face recognition learned
+- Better understanding of poetry
 
 ## What I've found difficult
 - So far so good
