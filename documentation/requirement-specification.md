@@ -1,16 +1,16 @@
 # Requirement specification - Eigenface face recognition
 
 ### Programming languages
-## This project: 
+####This project: 
 1. Python
 
-## Languages I can use for evaluating other people's work:
-1. Python
-1. Java
-1. C#
-1. Javascript/Typescript
-1. C++
-1. Haskell
+#### Languages I can use for evaluating other people's work:
+-  Python
+-  Java
+-  C#
+-  Javascript/Typescript
+-  C++
+-  Haskell
 
 ### Algorithms and data structures required for this project:
 Face recognition algorithm utilizing the Eigenfaces method
