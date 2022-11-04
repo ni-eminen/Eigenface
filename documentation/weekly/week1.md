@@ -13,3 +13,6 @@
 
 ## What I've found difficult
 - So far so good
+
+## What's next
+- I will complete the first 4 phases of the eigenfaces method as described in [the requirement spec](https://github.com/ni-eminen/eigenface/blob/master/documentation/requirement-specification.md#algorithms-and-data-structures-required-for-this-project).
