@@ -1,10 +1,10 @@
 # Requirement specification - Eigenface face recognition
 
 ### Programming languages
-This project: 
+### This project: 
 Python
 
-Languages I can use for evaluating other people's work:
+### Languages I can use for evaluating other people's work:
 Python
 Java
 C#
