@@ -16,4 +16,4 @@ Algorithms and data structures required for this project:
 Face recognition algorithm utilizing the Eigenfaces method
 Principal Component Analysis
 
-![eigenfaces process flow](https://github.com/ni-eminen/eigenface/tree/master/documentation/imgs)
+![eigenfaces process flow](https://github.com/ni-eminen/eigenface/blob/master/documentation/imgs/eigenfaces-algorithm.png)
