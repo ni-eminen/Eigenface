@@ -4,7 +4,7 @@
 #### This project: 
 - Python
 
-#### Languages I can use for evaluating other people's work:
+#### Languages I can evaluate in other people's work:
 -  Python
 -  Java
 -  C#
