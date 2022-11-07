@@ -13,8 +13,8 @@
 -  Haskell
 
 ### Algorithms and data structures required for this project:
-Face recognition algorithm utilizing the Eigenfaces method
-Principal Component Analysis
+- Face recognition algorithm utilizing the Eigenfaces method
+- Principal Component Analysis
 
 ![eigenfaces process flow](https://github.com/ni-eminen/eigenface/blob/master/documentation/imgs/eigenfaces-algorithm.png)
 <br/>source: [M.üge Çarıkçı, Figen Özen, A Face Recognition System Based on Eigenfaces Method](https://www.sciencedirect.com/science/article/pii/S2212017312000242?ref=pdf_download&fr=RR-2&rr=764c913e48f4376d)
