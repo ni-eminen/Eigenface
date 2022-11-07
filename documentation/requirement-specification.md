@@ -31,8 +31,8 @@ The program receives as an input an image of a face which it then classifies as 
 Training the algorithm must work in exponential time, recognizing a new face must be in polynomial time.
 
 Sources:
-[1]: https://www.sciencedirect.com/science/article/pii/S2212017312000242?ref=pdf_download&fr=RR-2&rr=764c913e48f4376d
-[2]: https://en.wikipedia.org/wiki/Eigenface#History
+[1]: https://www.sciencedirect.com/science/article/pii/S2212017312000242?ref=pdf_download&fr=RR-2&rr=764c913e48f4376d </br>
+[2]: https://en.wikipedia.org/wiki/Eigenface#History </br>
 
 Additional info:
 ### language
