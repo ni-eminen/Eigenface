@@ -17,7 +17,7 @@
 - Principal Component Analysis
 
 ![eigenfaces process flow](https://github.com/ni-eminen/eigenface/blob/master/documentation/imgs/eigenfaces-algorithm.png)
-<br/>source: [M.üge Çarıkçı, Figen Özen, A Face Recognition System Based on Eigenfaces Method](https://www.sciencedirect.com/science/article/pii/S2212017312000242?ref=pdf_download&fr=RR-2&rr=764c913e48f4376d)
+</br>source: [M.üge Çarıkçı, Figen Özen, A Face Recognition System Based on Eigenfaces Method](https://www.sciencedirect.com/science/article/pii/S2212017312000242?ref=pdf_download&fr=RR-2&rr=764c913e48f4376d)
 
 ### The problem
 The problem of face recognition has been bubbling since the 1960's, and the eigenfaces method for face recognition was presented in 1991 by M. Turk and A. Pentland. The problem, specifically, is classifying people's faces based on training data of said people.
@@ -30,7 +30,7 @@ The program receives as an input an image of a face which it then classifies as 
 ### Performance
 Training the algorithm must work in exponential time, recognizing a new face must be in polynomial time.
 
-Sources:
+Sources:</br>
 [1]: https://www.sciencedirect.com/science/article/pii/S2212017312000242?ref=pdf_download&fr=RR-2&rr=764c913e48f4376d </br>
 [2]: https://en.wikipedia.org/wiki/Eigenface#History </br>
 
