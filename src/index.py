@@ -20,6 +20,27 @@ def vector_to_img(vector, shape):
     img = Image.fromarray(array)
     return img
 
+def sum_of_vectors(arr: []):
+    sum_vector = np.zeros(len(arr[0]))
+    for i in range(0, len(arr[0])):
+        for v in  arr:
+            sum_vector[i] += v[i]
+
+    return sum_vector
+
+def scalar_multiply_vector(scalar, v):
+    arr = np.array([])
+    for x in v:
+        arr = np.append(arr, x*scalar)
+    return arr
+
+def negative_vector(v):
+    new_v = []
+    for x in v:
+        new_v.append(-x)
+    return np.array(new_v)
+
+
 all_imgs = []
 
 # Get images from dataset and convert them to vectors
@@ -28,13 +49,23 @@ for folder in glob.iglob('../dataset/*'):
         all_imgs.append(img_to_vector(img))
 
 # Create an np.array from the vectors
-np_images = np.array(all_imgs)
-avg_face = np_images.mean(axis=0)
+training_set = np.array(np.array(all_imgs))
 
-vector_to_img(avg_face, IMG_SHAPE).show()
+# Manual calculation of the average face:
+# avg_face = sum_of_vectors(training_set) * 1 / len(training_set)
 
-# Let's calculate the average face
-#avg_multiplier = 1/len(np_images)
-#sum_of_faces = sum(np_images)
-#avg_face = sum_of_faces/len(np_images)
-#vector_to_img(np.array(avg_face), IMG_SHAPE).show()
+avg_face = training_set.mean(axis=0)
+
+# Let's create the matrix A by subtracting the average face from each face in the training set
+A = []
+neg_avg_face = negative_vector(avg_face)
+for v in training_set:
+   A.append(sum_of_vectors([v, neg_avg_face]))
+
+# Convert A to a matrix
+A_m = np.asmatrix(A)
+
+A_t = A_m.transpose()
+
+# Form the covariance matrix
+cov_matrix = np.matmul(A_m, A_t)
