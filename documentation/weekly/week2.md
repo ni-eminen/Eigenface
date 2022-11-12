@@ -12,6 +12,7 @@
 - Learned what kind of dataset to use for eigenfaces
 
 ## What I've found difficult
+- Importing user modules not working, so I could not implement the tests in time
 - Wholly understanding what is going on and why it leads to accurate face recognition
 
 ## What's next
