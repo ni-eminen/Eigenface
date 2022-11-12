@@ -5,6 +5,7 @@ import glob
 
 IMG_SHAPE = (250, 250)
 
+
 def img_to_vector(path_to_img):
     # Load the image
     img = Image.open(path_to_img).convert('L')
@@ -15,24 +16,28 @@ def img_to_vector(path_to_img):
 
     return flat_array
 
+
 def vector_to_img(vector, shape):
-    array = vector.reshape(shape) #np.asarray(vector).reshape(shape)
+    array = vector.reshape(shape)
     img = Image.fromarray(array)
     return img
+
 
 def sum_of_vectors(arr: []):
     sum_vector = np.zeros(len(arr[0]))
     for i in range(0, len(arr[0])):
-        for v in  arr:
+        for v in arr:
             sum_vector[i] += v[i]
 
     return sum_vector
 
+
 def scalar_multiply_vector(scalar, v):
     arr = np.array([])
     for x in v:
-        arr = np.append(arr, x*scalar)
+        arr = np.append(arr, x * scalar)
     return arr
+
 
 def negative_vector(v):
     new_v = []
@@ -60,7 +65,7 @@ avg_face = training_set.mean(axis=0)
 A = []
 neg_avg_face = negative_vector(avg_face)
 for v in training_set:
-   A.append(sum_of_vectors([v, neg_avg_face]))
+    A.append(sum_of_vectors([v, neg_avg_face]))
 
 # Convert A to a matrix
 A_m = np.asmatrix(A)
