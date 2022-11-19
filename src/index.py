@@ -59,6 +59,7 @@ training_set = np.array(np.array(all_imgs))
 # Manual calculation of the average face:
 # avg_face = sum_of_vectors(training_set) * 1 / len(training_set)
 
+# Average face using numpy
 avg_face = training_set.mean(axis=0)
 
 # Let's create the matrix A by subtracting the average face from each face in the training set
