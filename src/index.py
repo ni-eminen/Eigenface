@@ -90,16 +90,16 @@ eigenpairs.sort(key=lambda x : x[0])
 eigenfaces = []
 # Choose the 10 eigenvectors with the highest eigenvalues as the eigenfaces
 for pair in eigenpairs[1:11]:
-    print(pair[0])
     eigenfaces.append(pair[1])
+
+print(len(eigenfaces))
+
 
 # Calculate eiganfaces
 # Create reduced eigenface space
 eigenspace = []
-for v in eigenvectors:
+for v in eigenfaces:
     eigenspace.append(np.matmul(v, A_m))
-
-
 
 # calculate eigenface of image in question
 
