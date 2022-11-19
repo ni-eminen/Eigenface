@@ -92,21 +92,19 @@ eigenfaces = []
 for pair in eigenpairs[1:11]:
     eigenfaces.append(pair[1])
 
-print(len(eigenfaces))
-
-
 # Calculate eiganfaces
 # Create reduced eigenface space
 eigenspace = []
 for v in eigenfaces:
     eigenspace.append(np.matmul(v, A_m))
 
-# calculate eigenface of image in question
+for x in eigenspace:
+    vector_to_img(x, shape=IMG_SHAPE).show()
 
+# calculate eigenface of image in question
 
 # Calculate euclidian distances between the image and the eigenfaces
 
 # Find the minimum Euclidian distance (or multiple minimums and check which is the most common)
-
 
 # Output the person or "not identified"
