@@ -10,7 +10,8 @@
 
 ## What I've found difficult
 - Slow progress this week is due to me attending professional events such as AI day and Slush, hopefully it is taken into account when assessing this weeks progress!
+- What to actually test at this point with unit tests, since most functions are mere abstractions of a few Numpy methods.
 
 ## What's next
 - I will complete the algorithm and prepare for analysis of different kinds of datasets and evaluation criterias
-- 
+- Unit testing
