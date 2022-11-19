@@ -75,3 +75,38 @@ A_t = A_m.transpose()
 
 # Form the covariance matrix
 cov_matrix = np.matmul(A_m, A_t)
+
+# Calculate the eigenvectors of the covariance matrix
+eigenvalues, eigenvectors = np.linalg.eig(cov_matrix)
+
+eigenpairs = []
+for i in range(0, len(eigenvalues)):
+    eigenpairs.append([eigenvalues[i], eigenvectors[i]])
+
+
+# Sort the eigenfaces by the highest eigenvalue
+eigenpairs.sort(key=lambda x : x[0])
+
+eigenfaces = []
+# Choose the 10 eigenvectors with the highest eigenvalues as the eigenfaces
+for pair in eigenpairs[1:11]:
+    print(pair[0])
+    eigenfaces.append(pair[1])
+
+# Calculate eiganfaces
+# Create reduced eigenface space
+eigenspace = []
+for v in eigenvectors:
+    eigenspace.append(np.matmul(v, A_m))
+
+
+
+# calculate eigenface of image in question
+
+
+# Calculate euclidian distances between the image and the eigenfaces
+
+# Find the minimum Euclidian distance (or multiple minimums and check which is the most common)
+
+
+# Output the person or "not identified"
