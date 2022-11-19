@@ -83,9 +83,8 @@ eigenpairs = []
 for i in range(0, len(eigenvalues)):
     eigenpairs.append([eigenvalues[i], eigenvectors[i]])
 
-
 # Sort the eigenfaces by the highest eigenvalue
-eigenpairs.sort(key=lambda x : x[0])
+eigenpairs.sort(key=lambda x: x[0])
 
 eigenfaces = []
 # Choose the 10 eigenvectors with the highest eigenvalues as the eigenfaces
