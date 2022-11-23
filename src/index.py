@@ -97,10 +97,17 @@ eigenspace = []
 for v in eigenfaces:
     eigenspace.append(np.matmul(v, A_m))
 
-for x in eigenspace:
-    vector_to_img(x, shape=IMG_SHAPE).show()
-
 # calculate eigenface of image in question
+test_image: np.ndarray = img_to_vector('../dataset/test/George_W_Bush_0001.jpg')
+mean_test_image = sum_of_vectors([test_image, neg_avg_face])
+#vector_to_img(mean_test_imgage, shape=IMG_SHAPE).show()
+
+# Project the eigfaces to eigspace
+proj_data = np.dot(training_set.transpose(), eigenfaces)
+proj_data = proj_data.transpose()
+
+#for x in proj_data:
+#    vector_to_img(x, shape=IMG_SHAPE).show()
 
 # Calculate euclidian distances between the image and the eigenfaces
 
