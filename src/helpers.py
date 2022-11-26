@@ -1,6 +1,7 @@
 import numpy as np
 from PIL import Image
 
+
 # None of these are needed any longer...
 
 class EigenfaceHelpers:
@@ -38,21 +39,21 @@ class EigenfaceHelpers:
         img = Image.fromarray(array)
         return img
 
-    @staticmethod
-    def sum_of_vectors(arr: []):
-        sum_vector = np.zeros(len(arr[0]))
-        for i in range(0, len(arr[0])):
-            for vector in arr:
-                sum_vector[i] += vector[i]
 
-        return sum_vector
+def sum_of_vectors(arr: []):
+    sum_vector = np.zeros(len(arr[0]))
+    for i in range(0, len(arr[0])):
+        for vector in arr:
+            sum_vector[i] += vector[i]
 
-    @staticmethod
-    def scalar_multiply_vector(scalar, vector):
-        arr = np.array([])
-        for x in vector:
-            arr = np.append(arr, x * scalar)
-        return arr
+    return sum_vector
+
+
+def scalar_multiply_vector(scalar, vector):
+    arr = np.array([])
+    for x in vector:
+        arr = np.append(arr, x * scalar)
+    return arr
 
 
 def negative_vector(vector):
