@@ -98,7 +98,7 @@ for v in eigenfaces:
     eigenspace.append(np.matmul(v, A_m))
 
 # calculate eigenface of image in question
-test_image: np.ndarray = img_to_vector('../dataset/test/George_W_Bush_0001.jpg')
+test_image: np.ndarray = img_to_vector('../test/George_W_Bush_0001.jpg')
 mean_test_image = sum_of_vectors([test_image, neg_avg_face])
 #vector_to_img(mean_test_imgage, shape=IMG_SHAPE).show()
 
