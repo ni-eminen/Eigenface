@@ -61,3 +61,45 @@ def negative_vector(vector):
     for x in vector:
         new_v.append(-x)
     return np.array(new_v)
+
+def two_of_the_same(arr: list):
+    if len(arr) == 0:
+        return None
+    while(len(arr)>0):
+        item = arr.pop()
+        if item in arr:
+            return item
+    return None
+
+def predictions(Xtest, y, idx_train, idx_test, avg_face, proj_data, w, type: str):
+    predicted_ids = []
+    correct_ids = []
+
+    for test_index in range(len(Xtest)):
+        unknown_face_vector = Xtest[test_index]
+        mean_unknown_face = np.subtract(unknown_face_vector, avg_face)
+        w_unknown = np.dot(proj_data, mean_unknown_face)
+        difference_vector = w - w_unknown
+        norms = np.linalg.norm(difference_vector, axis=1)
+
+        if type == "multi":
+            index = multi_id_prediction(norms, 10000)
+        else:
+            index = np.argmin(norms)
+
+        # Store the correct ids and the predicted ids in corresponding indices
+        correct_ids.append(y[idx_test[test_index]])
+        predicted_ids.append(y[idx_train[index]])
+
+    return correct_ids, predicted_ids
+
+def multi_id_prediction(norms, not_recognized: int, ):
+    index = []
+    for i in range(0, 2):
+        index.append(np.argmin(norms))
+
+    predicted_index = two_of_the_same(index)
+    if predicted_index is None:
+        return not_recognized
+    else:
+        return predicted_index
