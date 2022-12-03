@@ -1,4 +1,4 @@
-[GHA workflow badge](https://github.com/ni-eminen/eigenface/workflows/CI/badge.svg)
+![GHA workflow badge](https://github.com/ni-eminen/eigenface/workflows/CI/badge.svg)
 
 # Eigenfaces - Python implementation
 
