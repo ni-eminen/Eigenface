@@ -1,3 +1,5 @@
+https://github.com/ni-eminen/eigenface/workflows/CI/badge.svg
+
 # Eigenfaces - Python implementation
 
 [requirement specification](https://github.com/ni-eminen/eigenface/blob/master/documentation/requirement-specification.md)
