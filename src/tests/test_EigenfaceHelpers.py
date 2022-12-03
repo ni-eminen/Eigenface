@@ -1,5 +1,5 @@
 import unittest
-from helpers import EigenfaceHelpers, negative_vector, sum_of_vectors, scalar_multiply_vector
+from src.helpers import EigenfaceHelpers, negative_vector, sum_of_vectors, scalar_multiply_vector
 import numpy as np
 import PIL
 import os
@@ -17,7 +17,7 @@ class TestEigenHelpers(unittest.TestCase):
     def test_img_to_vector(self):
         img = os.path.dirname(os.path.abspath('.'))
         print(img)
-        vector = self.eighelpers.img_to_vector(img + '/src/tests/test_images/George_W_Bush_0005.jpg')
+        vector = self.eighelpers.img_to_vector(img + '/eigenface/src/tests/test_images/George_W_Bush_0005.jpg')
         self.assertEqual(vector.shape, (4096,))
 
     def test_vector_to_img(self):
