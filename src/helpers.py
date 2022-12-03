@@ -62,16 +62,24 @@ def negative_vector(vector):
         new_v.append(-x)
     return np.array(new_v)
 
-def two_of_the_same(arr: list):
+def n_of_the_same(arr: list, n: int):
+    combo = 0
     if len(arr) == 0:
         return None
     while(len(arr)>0):
-        item = arr.pop()
+        if combo == 0:
+            item = arr.pop()
         if item in arr:
-            return item
+            combo += 1
+            print(combo)
+            del arr[arr.index(item)]
+            if combo >= n:
+                return item
+        else:
+            combo = 0
     return None
 
-def predictions(Xtest, y, idx_train, idx_test, avg_face, proj_data, w, type: str):
+def predictions(Xtest, y, idx_train, idx_test, avg_face, proj_data, w, type: str, multi_n=2):
     predicted_ids = []
     correct_ids = []
 
@@ -83,7 +91,7 @@ def predictions(Xtest, y, idx_train, idx_test, avg_face, proj_data, w, type: str
         norms = np.linalg.norm(difference_vector, axis=1)
 
         if type == "multi":
-            index = multi_id_prediction(norms, 10000)
+            index = multi_id_prediction(norms, 0, multi_n)
         else:
             index = np.argmin(norms)
 
@@ -93,12 +101,12 @@ def predictions(Xtest, y, idx_train, idx_test, avg_face, proj_data, w, type: str
 
     return correct_ids, predicted_ids
 
-def multi_id_prediction(norms, not_recognized: int, ):
+def multi_id_prediction(norms, not_recognized: int, n: int):
     index = []
-    for i in range(0, 2):
+    for i in range(0, n*2):
         index.append(np.argmin(norms))
 
-    predicted_index = two_of_the_same(index)
+    predicted_index = n_of_the_same(index, n)
     if predicted_index is None:
         return not_recognized
     else:
