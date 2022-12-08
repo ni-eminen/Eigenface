@@ -3,6 +3,7 @@
 # Eigenfaces - Python implementation
 
 [requirement specification](https://github.com/ni-eminen/eigenface/blob/master/documentation/requirement-specification.md)
+[installations and instructions](https://github.com/ni-eminen/eigenface/blob/master/documentation/instructions.md)
 
 ## Weekly reports:
 [week 1](https://github.com/ni-eminen/eigenface/blob/master/documentation/weekly/week1.md)
