@@ -1,4 +1,4 @@
-# Week 2 - Eigenfaces
+# Week 5 - Eigenfaces
 
 ## Progress
 - Documentation is now on par. Codecov testing added to github
