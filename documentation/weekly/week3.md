@@ -1,4 +1,4 @@
-# Week 2 - Eigenfaces
+# Week 3 - Eigenfaces
 
 ## Progress
 - Didn't reach the progress that I was supposed to due to having to learn some things about linear algebra

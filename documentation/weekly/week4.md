@@ -1,4 +1,4 @@
-# Week 2 - Eigenfaces
+# Week 4 - Eigenfaces
 
 ## Progress
 - Tested all the helper functions, although this week I had to render them useless in order to gain performance. It made no sense to do them by hand in the first place, but I treated it as more of a learning experiment.
