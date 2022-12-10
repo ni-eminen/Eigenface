@@ -1,6 +1,7 @@
 from collections import Counter
 
 import numpy as np
+from scipy.spatial.distance import cityblock, hamming
 from PIL import Image
 
 
@@ -65,7 +66,30 @@ def negative_vector(vector):
     return np.array(new_v)
 
 
-def predict(Xtest, targets, idx_train, idx_test, avg_face, proj_data, w, type="", sample_size=3, threshold=2):
+def euclidean_distance(a, b):
+    difference_vector = a - b
+    norms = np.linalg.norm(difference_vector, axis=1)
+    return norms
+
+
+def manhattan(a, b):
+    distance_matrix = np.array([])
+    for v in a:
+        ham = cityblock(v, b)
+        distance_matrix = np.append(distance_matrix, ham)
+    return distance_matrix
+
+def hamming_distance(a, b):
+    distance_matrix = np.array([])
+    for v in a:
+        ham = hamming(v, b)
+        distance_matrix = np.append(distance_matrix, ham)
+    return distance_matrix
+
+
+
+def predict(Xtest, targets, idx_train, idx_test, avg_face, proj_data, w, distance_func=manhattan, type="",
+            sample_size=3, threshold=2):
     predicted_ids = []
     correct_ids = []
 
@@ -73,13 +97,12 @@ def predict(Xtest, targets, idx_train, idx_test, avg_face, proj_data, w, type=""
         unknown_face_vector = Xtest[test_index]
         mean_unknown_face = np.subtract(unknown_face_vector, avg_face)
         w_unknown = np.dot(proj_data, mean_unknown_face)
-        difference_vector = w - w_unknown
-        norms = np.linalg.norm(difference_vector, axis=1)
+        difference_vector = distance_func(w, w_unknown)
 
         if type == "multi":
-            index = multi_id_prediction(norms, sample_size, threshold, idx_train, targets)
+            index = multi_id_prediction(difference_vector, sample_size, threshold, idx_train, targets)
         else:
-            index = np.argmin(norms)
+            index = np.argmin(difference_vector)
 
         # Store the correct ids and the predicted ids in corresponding indices
         correct_ids.append(index_to_id(test_index, idx_test, targets))
