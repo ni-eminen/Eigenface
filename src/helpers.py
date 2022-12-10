@@ -65,8 +65,7 @@ def negative_vector(vector):
     return np.array(new_v)
 
 
-
-def predictions(Xtest, targets, idx_train, idx_test, avg_face, proj_data, w, type ="", sample_size=3, threshold=2):
+def predict(Xtest, targets, idx_train, idx_test, avg_face, proj_data, w, type="", sample_size=3, threshold=2):
     predicted_ids = []
     correct_ids = []
 
@@ -87,6 +86,7 @@ def predictions(Xtest, targets, idx_train, idx_test, avg_face, proj_data, w, typ
         predicted_ids.append(index_to_id(index, idx_train, targets))
 
     return correct_ids, predicted_ids
+
 
 def index_to_id(idx, idx_train, targets):
     return targets[idx_train[idx]]
@@ -110,14 +110,18 @@ def n_of_the_same(arr: list, n: int):
     if len(arr) == 0:
         return None
 
+    threshold_passing_items = []
+
     # Use a Counter to count the number of times each item appears in the array
     count = Counter(arr)
-
 
     # Return the first item that appears at least n times in the array
     for item, c in count.items():
         if c >= n:
-            return item
+            threshold_passing_items.append((item, c))
 
-    # If no item appears at least n times, return None
-    return None
+    if len(threshold_passing_items) == 0:
+        return None
+    else:
+        most_common = sorted(threshold_passing_items, key=lambda x: x[1], reverse=True)
+        return most_common[0][0]
