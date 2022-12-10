@@ -1,3 +1,5 @@
+from collections import Counter
+
 import numpy as np
 from PIL import Image
 
@@ -62,24 +64,9 @@ def negative_vector(vector):
         new_v.append(-x)
     return np.array(new_v)
 
-def n_of_the_same(arr: list, n: int):
-    combo = 0
-    if len(arr) == 0:
-        return None
-    while(len(arr)>0):
-        if combo == 0:
-            item = arr.pop()
-        if item in arr:
-            combo += 1
-            print(combo)
-            del arr[arr.index(item)]
-            if combo >= n:
-                return item
-        else:
-            combo = 0
-    return None
 
-def predictions(Xtest, y, idx_train, idx_test, avg_face, proj_data, w, type: str, multi_n=2):
+
+def predictions(Xtest, targets, idx_train, idx_test, avg_face, proj_data, w, type ="", sample_size=3, threshold=2):
     predicted_ids = []
     correct_ids = []
 
@@ -91,23 +78,46 @@ def predictions(Xtest, y, idx_train, idx_test, avg_face, proj_data, w, type: str
         norms = np.linalg.norm(difference_vector, axis=1)
 
         if type == "multi":
-            index = multi_id_prediction(norms, 0, multi_n)
+            index = multi_id_prediction(norms, sample_size, threshold, idx_train, targets)
         else:
             index = np.argmin(norms)
 
         # Store the correct ids and the predicted ids in corresponding indices
-        correct_ids.append(y[idx_test[test_index]])
-        predicted_ids.append(y[idx_train[index]])
+        correct_ids.append(index_to_id(test_index, idx_test, targets))
+        predicted_ids.append(index_to_id(index, idx_train, targets))
 
     return correct_ids, predicted_ids
 
-def multi_id_prediction(norms, not_recognized: int, n: int):
-    index = []
-    for i in range(0, n*2):
-        index.append(np.argmin(norms))
+def index_to_id(idx, idx_train, targets):
+    return targets[idx_train[idx]]
 
-    predicted_index = n_of_the_same(index, n)
-    if predicted_index is None:
-        return not_recognized
-    else:
-        return predicted_index
+
+def multi_id_prediction(norms: np.array, sample_size: int, threshold: int, idx_train, targets):
+    indices = np.argpartition(norms, sample_size)[:sample_size]  # multi_id_prediction(norms, 0, multi_n)
+    represented_ids = [index_to_id(i, idx_train, targets) for i in indices]
+    most_common_id = n_of_the_same(represented_ids, threshold)
+
+    # Return the most common ids index
+    for i, x in enumerate(represented_ids):
+        if x == most_common_id:
+            return indices[i]
+
+    return 0
+
+
+def n_of_the_same(arr: list, n: int):
+    # Check if the array is empty
+    if len(arr) == 0:
+        return None
+
+    # Use a Counter to count the number of times each item appears in the array
+    count = Counter(arr)
+
+
+    # Return the first item that appears at least n times in the array
+    for item, c in count.items():
+        if c >= n:
+            return item
+
+    # If no item appears at least n times, return None
+    return None
