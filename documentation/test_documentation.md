@@ -4,21 +4,34 @@
 ### Coverage report
 [![codecov](https://codecov.io/github/ni-eminen/eigenface/branch/master/graph/badge.svg?token=OE1J0JCOY3)](https://codecov.io/github/ni-eminen/eigenface)
 ![GHA workflow badge](https://github.com/ni-eminen/eigenface/workflows/CI/badge.svg)
-### Satunnaisten isojen lukujen testaus
-Testaus on laadittu tarkistamaan että palautetut luvut ovat tarpeeksi suuria. Niinden lukujen osalta joiden kuuluu olla parittomia on tätä myös testattu. Testit on toteutettu silmukan avulla, joka testaa satunnaisten lukujen luomista erilaisilla bitti kooilla. 
 
-### Miller-Rabin
-Miller-Rabin algoritmin osalta testataan että algoritmi palauttaa epätosi kun luku on komposittii ja tosi kun luku on alkuluku. Testeissä algoritmille annetaan useampi syöte komposiitti ja varmistettuja alkulukuja.
+### What was tested
+The tests concentrate on validating most of the helper functions. The main algorithm isn't itself being tested, as the vast majority of operation are being done with numpy.
 
-### Tiedostoon kirjoittaminen ja lukeminen
-Testataan että ohjelma kykenee kirjoittamaan kun ohjelma saa validin polun ja hylkää silloin kun polkua ei ole olemassa.
+### Vector operations
+All the handmade vector operations are tested to ensure correct results on common operations.
 
-### Viestien salaaminen ja purkaminen
-Testit on laadittu tarkistamaan palauttavatko salaus ja purkaus metodit oikean muotoista palautusarvoa. Testit salaavat ja purkavat viestin ja testi varmistaa että viesti on alkuperäisessä muodossa purkauksen jälkeen.
+### Image processing
+Image processing is being use for larger images. This includes cropping and modifying the color composition of the dataset images, if they are larger than 64x64.
 
-## Testien toistettavuus
-Testejä on helppo toistaa ajamalla yksikkötestit.
+### Distances
+Common machine learning distance measures such as the hamming, euclidean and cityblock distances are being tested. This program implements handmade distance calculations between matrices and vectors.
 
-## Käyttäjäsyötteet
-Ohjelman käyttäjäsyöte osiot ovat testattu manuaalisesti ajamalla ohjelma paikallisesti ja antamalla ohjelmalle syötteitä.
+### KNN predictions
+In an attempt to improve results a k-nearest neighbour algorithm was implemented. It's simple use case is tested as it is an integral part of the algorithm.
 
+## Running the tests
+
+Install the dependencies for the project
+    
+    poetry install
+
+Run pytest
+    
+    pytest
+
+To generate an HTML document of the test coverage, run
+
+    coverage html
+
+and open the generated index.html file in your browser.
