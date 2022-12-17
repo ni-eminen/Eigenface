@@ -72,7 +72,7 @@ def euclidean_distance(a, b):
     return norms
 
 
-def manhattan(a, b):
+def manhattan_distance(a, b):
     distance_matrix = np.array([])
     for v in a:
         ham = cityblock(v, b)
@@ -88,10 +88,9 @@ def hamming_distance(a, b):
 
 
 
-def predict(Xtest, targets, idx_train, idx_test, avg_face, proj_data, w, distance_func=manhattan, type="",
+def predict(Xtest, targets, idx_train, avg_face, proj_data, w, distance_func=manhattan_distance, type="",
             sample_size=3, threshold=2):
     predicted_ids = []
-    correct_ids = []
 
     for test_index in range(len(Xtest)):
         unknown_face_vector = Xtest[test_index]
@@ -105,10 +104,9 @@ def predict(Xtest, targets, idx_train, idx_test, avg_face, proj_data, w, distanc
             index = np.argmin(difference_vector)
 
         # Store the correct ids and the predicted ids in corresponding indices
-        correct_ids.append(index_to_id(test_index, idx_test, targets))
         predicted_ids.append(index_to_id(index, idx_train, targets))
 
-    return correct_ids, predicted_ids
+    return predicted_ids
 
 
 def index_to_id(idx, idx_train, targets):

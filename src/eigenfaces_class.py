@@ -30,13 +30,10 @@ class Eigenfaces:
         for v in training_set:
             sub = np.subtract(v, avg_face)
             normalized_faces.append(sub)
-        normalized_faces_matrix = np.asmatrix(normalized_faces)
-        normalized_faces_t = np.array(normalized_faces).transpose()
         cov_matrix = np.cov(np.array(normalized_faces))
         eigenvalues, eigenvectors = np.linalg.eig(cov_matrix)
         eig_pairs = [(eigenvalues[index], eigenvectors[:, index]) for index in range(len(eigenvalues))]
         eig_pairs.sort(reverse=True)
-        eigvalues_sort = [eig_pairs[index][0] for index in range(len(eigenvalues))]
         eigvectors_sort = [eig_pairs[index][1] for index in range(len(eigenvalues))]
         eigenfaces = np.array(eigvectors_sort[:20]).transpose()
         proj_data = np.dot(training_set.transpose(), eigenfaces)
