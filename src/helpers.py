@@ -67,19 +67,29 @@ def negative_vector(vector):
 
 
 def euclidean_distance(a, b):
+    if a.shape[1] != b.shape[0]:
+        print(a.shape, b.shape)
+        return None
     difference_vector = a - b
     norms = np.linalg.norm(difference_vector, axis=1)
     return norms
 
 
-def manhattan_distance(a, b):
+def manhattan_distance(a: np.array, b: np.array):
+    if np.array(a).shape[1] != np.array(b).shape[0]:
+        return None
+
     distance_matrix = np.array([])
     for v in a:
         ham = cityblock(v, b)
         distance_matrix = np.append(distance_matrix, ham)
     return distance_matrix
 
+
 def hamming_distance(a, b):
+    if np.array(a).shape[1] != np.array(b).shape[0]:
+        return None
+
     distance_matrix = np.array([])
     for v in a:
         ham = hamming(v, b)
@@ -87,11 +97,9 @@ def hamming_distance(a, b):
     return distance_matrix
 
 
-
 def predict(Xtest, targets, idx_train, avg_face, proj_data, w, distance_func=manhattan_distance, type="",
             sample_size=3, threshold=2):
     predicted_ids = []
-
     for test_index in range(len(Xtest)):
         unknown_face_vector = Xtest[test_index]
         mean_unknown_face = np.subtract(unknown_face_vector, avg_face)
@@ -99,7 +107,7 @@ def predict(Xtest, targets, idx_train, avg_face, proj_data, w, distance_func=man
         difference_vector = distance_func(w, w_unknown)
 
         if type == "KNN":
-            index = multi_id_prediction(difference_vector, sample_size, threshold, idx_train, targets)
+            index = KNN_prediction(difference_vector, sample_size, threshold, idx_train, targets)
         else:
             index = np.argmin(difference_vector)
 
@@ -113,9 +121,13 @@ def index_to_id(idx, idx_train, targets):
     return targets[idx_train[idx]]
 
 
-def multi_id_prediction(norms: np.array, sample_size: int, threshold: int, idx_train, targets):
-    indices = np.argpartition(norms, sample_size)[:sample_size]  # multi_id_prediction(norms, 0, multi_n)
+def KNN_prediction(norms: np.array, sample_size: int, threshold: int, idx_train, targets):
+    # Get indices of the smallest values in norms array
+    indices = np.argpartition(norms, sample_size)[:sample_size]
+
+    # Convert the indices to the person ids they represent
     represented_ids = [index_to_id(i, idx_train, targets) for i in indices]
+
     most_common_id = n_of_the_same(represented_ids, threshold)
 
     # Return the most common ids index
