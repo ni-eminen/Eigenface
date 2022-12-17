@@ -1,4 +1,5 @@
 ![GHA workflow badge](https://github.com/ni-eminen/eigenface/workflows/CI/badge.svg)
+[![codecov](https://codecov.io/github/ni-eminen/eigenface/branch/master/graph/badge.svg?token=OE1J0JCOY3)](https://codecov.io/github/ni-eminen/eigenface)
 
 # Eigenfaces - Python implementation
 

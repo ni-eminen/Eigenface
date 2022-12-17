@@ -2,7 +2,7 @@
 
 ## Unit testing
 ### Coverage report
-[![codecov](https://codecov.io/gh/Zatyri/RSA/branch/main/graph/badge.svg?token=N5A8G9TN4A)](https://codecov.io/gh/Zatyri/RSA)
+[![codecov](https://codecov.io/github/ni-eminen/eigenface/branch/master/graph/badge.svg?token=OE1J0JCOY3)](https://codecov.io/github/ni-eminen/eigenface)
 ![GHA workflow badge](https://github.com/ni-eminen/eigenface/workflows/CI/badge.svg)
 ### Satunnaisten isojen lukujen testaus
 Testaus on laadittu tarkistamaan että palautetut luvut ovat tarpeeksi suuria. Niinden lukujen osalta joiden kuuluu olla parittomia on tätä myös testattu. Testit on toteutettu silmukan avulla, joka testaa satunnaisten lukujen luomista erilaisilla bitti kooilla. 
