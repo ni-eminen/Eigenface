@@ -98,7 +98,7 @@ def predict(Xtest, targets, idx_train, avg_face, proj_data, w, distance_func=man
         w_unknown = np.dot(proj_data, mean_unknown_face)
         difference_vector = distance_func(w, w_unknown)
 
-        if type == "multi":
+        if type == "KNN":
             index = multi_id_prediction(difference_vector, sample_size, threshold, idx_train, targets)
         else:
             index = np.argmin(difference_vector)
@@ -136,11 +136,12 @@ def n_of_the_same(arr: list, n: int):
     # Use a Counter to count the number of times each item appears in the array
     count = Counter(arr)
 
-    # Return the first item that appears at least n times in the array
+    # Create an array of the items that appear more than or equal to the times mentioned in the threshold
     for item, c in count.items():
         if c >= n:
             threshold_passing_items.append((item, c))
 
+    # Return the item that appears most commonly
     if len(threshold_passing_items) == 0:
         return None
     else:
