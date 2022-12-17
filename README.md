@@ -7,7 +7,7 @@
 
 [installations and instructions](https://github.com/ni-eminen/eigenface/blob/master/documentation/instructions.md)
 
-[implementation](https://github.com/ni-eminen/eigenface/blob/master/documentation/implementation.md)
+[implementation document](https://github.com/ni-eminen/eigenface/blob/master/documentation/implementation.md)
 
 [testing document](https://github.com/ni-eminen/eigenface/blob/master/documentation/test_documentation.md)
 
