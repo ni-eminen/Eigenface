@@ -12,5 +12,7 @@ The performance of the different distance methods and the K-nearest neighbour me
 # What could be improved
 There are some things left to be improved. For example, the predict function could be implemented slightly more performantly and with some more clarity in terms of readability.
 
+If this algorithm was to be used in production, it should also be made into its own class with proper parameters to be modified per use-case. I have not implemented that here, because the purpose of this project is to build and demonstrate the core algorithm and its variations.
+
 # Sources
 [M.üge Çarıkçı, Figen Özen, A Face Recognition System Based on Eigenfaces Method](https://www.sciencedirect.com/science/article/pii/S2212017312000242?ref=pdf_download&fr=RR-2&rr=764c913e48f4376d)
