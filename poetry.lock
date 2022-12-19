@@ -345,6 +345,20 @@ optional = false
 python-versions = ">=3.4"
 
 [[package]]
+name = "ipyplot"
+version = "1.1.1"
+description = "Simple package that leverages IPython and HTML for more efficient, reach and interactive plotting of images in Jupyter Notebooks"
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+IPython = "*"
+numpy = "*"
+pillow = "*"
+shortuuid = "*"
+
+[[package]]
 name = "ipython"
 version = "8.6.0"
 description = "IPython: Productive Interactive Computing"
@@ -1199,6 +1213,14 @@ test = ["pytest (>=6.2)", "virtualenv (>20)"]
 toml = ["setuptools (>=42)"]
 
 [[package]]
+name = "shortuuid"
+version = "1.0.11"
+description = "A generator library for concise, unambiguous and URL-safe UUIDs."
+category = "main"
+optional = false
+python-versions = ">=3.5"
+
+[[package]]
 name = "six"
 version = "1.16.0"
 description = "Python 2 and 3 compatibility utilities"
@@ -1374,7 +1396,7 @@ testing = ["flake8 (<5)", "func-timeout", "jaraco.functools", "jaraco.itertools"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "8534f48b8ee96033a243fb159298c0b9fc26f79d8489e98bf977da28460fd8b2"
+content-hash = "934d9b2f6de99b25d8e09c971c8811293ee9749203e19987ca050e0b9b99ad86"
 
 [metadata.files]
 anyio = [
@@ -1700,6 +1722,10 @@ ipykernel = [
 ipynb = [
     {file = "ipynb-0.5.1-py3-none-any.whl", hash = "sha256:9686aafce6fd58ec160fa6ba649a7810df89cc0f06a317188ac5e59fd728e325"},
     {file = "ipynb-0.5.1.tar.gz", hash = "sha256:8d834c777ca3885289938728cc382f081c86a58e92961e86f0aba60c96938ce5"},
+]
+ipyplot = [
+    {file = "ipyplot-1.1.1-py3-none-any.whl", hash = "sha256:837ed15f47eee18b476c9bca78b46437b64944b71e5e0f0ac560cb758128d16d"},
+    {file = "ipyplot-1.1.1.tar.gz", hash = "sha256:c5807454723c830581f24a977845b46fddd896c2b773fb2d830c7b34bf12b41c"},
 ]
 ipython = [
     {file = "ipython-8.6.0-py3-none-any.whl", hash = "sha256:91ef03016bcf72dd17190f863476e7c799c6126ec7e8be97719d1bc9a78a59a4"},
@@ -2330,6 +2356,10 @@ setuptools = [
 setuptools-scm = [
     {file = "setuptools_scm-7.0.5-py3-none-any.whl", hash = "sha256:7930f720905e03ccd1e1d821db521bff7ec2ac9cf0ceb6552dd73d24a45d3b02"},
     {file = "setuptools_scm-7.0.5.tar.gz", hash = "sha256:031e13af771d6f892b941adb6ea04545bbf91ebc5ce68c78aaf3fff6e1fb4844"},
+]
+shortuuid = [
+    {file = "shortuuid-1.0.11-py3-none-any.whl", hash = "sha256:27ea8f28b1bd0bf8f15057a3ece57275d2059d2b0bb02854f02189962c13b6aa"},
+    {file = "shortuuid-1.0.11.tar.gz", hash = "sha256:fc75f2615914815a8e4cb1501b3a513745cb66ef0fd5fc6fb9f8c3fa3481f789"},
 ]
 six = [
     {file = "six-1.16.0-py2.py3-none-any.whl", hash = "sha256:8abb2f1d86890a2dfb989f9a77cfcfd3e47c2a354b01111771326f8aa26e0254"},

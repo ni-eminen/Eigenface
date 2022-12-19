@@ -18,7 +18,7 @@ class TestEigenHelpers(unittest.TestCase):
     def test_img_to_vector(self):
         img = os.path.dirname(os.path.abspath('.'))
         print(img)
-        vector = self.eighelpers.img_to_vector(img + '/eigenface/src/tests/test_images/George_W_Bush_0005.jpg')
+        vector = self.eighelpers.img_to_vector(img + '/src/tests/test_images/George_W_Bush_0005.jpg')
         self.assertEqual(vector.shape, (4096,))
 
     def test_vector_to_img(self):
