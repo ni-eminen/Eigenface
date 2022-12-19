@@ -3,14 +3,16 @@ from PIL import Image
 from sklearn.datasets import fetch_olivetti_faces
 from sklearn.model_selection import train_test_split
 from helpers import EigenfaceHelpers, negative_vector
-
-
 class Eigenfaces:
+    """The eigenfaces class is used to test how the eigenfaces training performs with different size datasets."""
     def __init__(self, DATASET_SIZE=400):
         self.DATASET_SIZE = DATASET_SIZE
         self.IMG_SHAPE = (64, 64)
 
     def train_on_olivetti_dataset(self):
+        """
+        Trains the eigenfaces algorithm with the olivetti_faces dataset
+        """
         olivetti = fetch_olivetti_faces()
 
         # Create a larger dataset (with repetition, but it is not relevant in this context)

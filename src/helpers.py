@@ -1,3 +1,6 @@
+"""This file contains helper functions for the eigenfaces method. Additionally a class EigenfaceHelpers that
+    contains similar, contextual methods."""
+
 from collections import Counter
 
 import numpy as np
@@ -8,7 +11,12 @@ from PIL import Image
 # None of these are needed any longer...
 
 class EigenfaceHelpers:
+    """The EigenfaceHelpers class contains functions that help in transforming vectors, cropping images etc."""
     def __init__(self, img_shape):
+        """
+        Initialize the EigenfaceHelpers
+        :rtype: object
+        """
         self.img_shape = img_shape
 
     def crop_image(self, img: Image):
@@ -133,13 +141,13 @@ def manhattan_distance(a: np.array, v: np.array):
         return None
 
     distance_matrix = np.array([])
-    for v in a:
-        ham = cityblock(v, v)
+    for v_a in a:
+        ham = cityblock(v_a, v)
         distance_matrix = np.append(distance_matrix, ham)
     return distance_matrix
 
 
-def hamming_distance(a, v):
+def hamming_distance(a: np.array, v: np.array):
     """
     Returns and array of Hamming distances between the array b and the arrays in matrix a.
     :param a: 2d array
@@ -156,30 +164,30 @@ def hamming_distance(a, v):
     return distance_matrix
 
 
-def predict(Xtest, targets, idx_train, avg_face, proj_data, w, distance_func=manhattan_distance, type="",
+def predict(xtest, targets, idx_train, avg_face, proj_data, w, distance_func=manhattan_distance, type_="",
             sample_size=3, threshold=2):
     """
     Predicts ids for each of the images in Xtest
-    :param Xtest: An array of vectors representing images
+    :param xtest: An array of vectors representing images
     :param targets: The target ids
     :param idx_train: The indexes that correspond to the correct ids within the targets array
     :param avg_face: The average face that has been calculated using the dataset
     :param proj_data: The projection of the training images onto the eigenfaces
     :param w: The weights for the projections
     :param distance_func: Preferred distance measurement for measuring the distance between the test face weights and the projections' weights
-    :param type: The type of evaluation. "KNN" for K-nearest number evaluation of the face.
+    :param type_: The type of evaluation. "KNN" for K-nearest number evaluation of the face.
     :param sample_size: If "KNN" type has been selected, this is the amount of nearest neighbours that are evaluated
     :param threshold: The amount of identical ids required to identify a face
     :return: An array of predicted ids. Each index corresponds the index in the Xtest array
     """
     predicted_ids = []
-    for test_index in range(len(Xtest)):
-        unknown_face_vector = Xtest[test_index]
+    for test_index in range(len(xtest)):
+        unknown_face_vector = xtest[test_index]
         mean_unknown_face = np.subtract(unknown_face_vector, avg_face)
         w_unknown = np.dot(proj_data, mean_unknown_face)
         difference_vector = distance_func(w, w_unknown)
 
-        if type == "KNN":
+        if type_ == "KNN":
             index = KNN_prediction(difference_vector, sample_size, threshold, idx_train, targets)
         else:
             index = np.argmin(difference_vector)
