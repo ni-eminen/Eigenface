@@ -7,6 +7,11 @@
 
 [installations and instructions](https://github.com/ni-eminen/eigenface/blob/master/documentation/instructions.md)
 
+[implementation document](https://github.com/ni-eminen/eigenface/blob/master/documentation/implementation.md)
+
+[testing document](https://github.com/ni-eminen/eigenface/blob/master/documentation/test_documentation.md)
+
+
 ## Weekly reports:
 [week 1](https://github.com/ni-eminen/eigenface/blob/master/documentation/weekly/week1.md)</br>
 [week 2](https://github.com/ni-eminen/eigenface/blob/master/documentation/weekly/week2.md)</br>
