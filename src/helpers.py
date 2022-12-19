@@ -158,8 +158,8 @@ def hamming_distance(a: np.array, v: np.array):
         return None
 
     distance_matrix = np.array([])
-    for v in a:
-        ham = hamming(v, v)
+    for v_a in a:
+        ham = hamming(v_a, v)
         distance_matrix = np.append(distance_matrix, ham)
     return distance_matrix
 
