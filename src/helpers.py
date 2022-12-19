@@ -11,7 +11,22 @@ class EigenfaceHelpers:
     def __init__(self, img_shape):
         self.img_shape = img_shape
 
-    def crop_image(self, img):
+    def crop_image(self, img: Image):
+        """Crop the center of an image.
+
+        This function crops the center of the image to the specified width and height. The width and height
+        of the cropped image are specified by the `img_shape` attribute of the object.
+
+        Parameters
+        ----------
+        img : Image
+            The image to be cropped.
+
+        Returns
+        -------
+        im : Image
+            The cropped image.
+        """
         width, height = img.size
 
         new_width = self.img_shape[0]
@@ -27,6 +42,11 @@ class EigenfaceHelpers:
         return im
 
     def img_to_vector(self, path_to_img):
+        """
+        Converts an image in to a 1d vector
+        :param path_to_img: Path to the image
+        :return: 1d np.array
+        """
         # Load the image
         img = Image.open(path_to_img).convert('L')
         img = self.crop_image(img)
@@ -38,12 +58,22 @@ class EigenfaceHelpers:
         return flat_array
 
     def vector_to_img(self, vector):
+        """
+        Converts a vector into a PIL image
+        :param vector: Image in vector format
+        :return: The image of type PIL.Image
+        """
         array = vector.reshape(self.img_shape)
         img = Image.fromarray(array)
         return img
 
 
 def sum_of_vectors(arr: []):
+    """
+    Sums an array of vector into one vector
+    :param arr: Array of vectors. The vectors can be of any 1d iterable type
+    :return: The sum of all the vectors
+    """
     sum_vector = np.zeros(len(arr[0]))
     for i in range(0, len(arr[0])):
         for vector in arr:
@@ -53,6 +83,12 @@ def sum_of_vectors(arr: []):
 
 
 def scalar_multiply_vector(scalar, vector):
+    """
+    Scales a vector by a scalar
+    :param scalar: Scalar
+    :param vector: Vector
+    :return: The vector scaled with the scalar
+    """
     arr = np.array([])
     for x in vector:
         arr = np.append(arr, x * scalar)
@@ -60,45 +96,82 @@ def scalar_multiply_vector(scalar, vector):
 
 
 def negative_vector(vector):
+    """
+    Negates a vector.
+    :param vector: A 1d array
+    :return: The 1d array with all its elements scaled by -1.
+    """
     new_v = []
     for x in vector:
         new_v.append(-x)
     return np.array(new_v)
 
 
-def euclidean_distance(a, b):
-    if a.shape[1] != b.shape[0]:
-        print(a.shape, b.shape)
+def euclidean_distance(a: np.array, v: np.array):
+    """
+    Returns an array of euclidean distance between a vector and a matrix's component vectors.
+    :param a: An array of vectors
+    :param v: A vector
+    :return: An array of Euclidean distances between the array elements and the vector b
+    """
+    if a.shape[1] != v.shape[0]:
+        print(a.shape, v.shape)
         return None
-    difference_vector = a - b
+    difference_vector = a - v
     norms = np.linalg.norm(difference_vector, axis=1)
     return norms
 
 
-def manhattan_distance(a: np.array, b: np.array):
-    if np.array(a).shape[1] != np.array(b).shape[0]:
+def manhattan_distance(a: np.array, v: np.array):
+    """
+    Returns and array of manhattan distances between the array b and the arrays in matrix a.
+    :param a: 2d array
+    :param v: 1d array
+    :return: 1d array of Manhattan distances between corresponding elements in a with the vector v
+    """
+    if np.array(a).shape[1] != np.array(v).shape[0]:
         return None
 
     distance_matrix = np.array([])
     for v in a:
-        ham = cityblock(v, b)
+        ham = cityblock(v, v)
         distance_matrix = np.append(distance_matrix, ham)
     return distance_matrix
 
 
-def hamming_distance(a, b):
-    if np.array(a).shape[1] != np.array(b).shape[0]:
+def hamming_distance(a, v):
+    """
+    Returns and array of Hamming distances between the array b and the arrays in matrix a.
+    :param a: 2d array
+    :param v: 1d array
+    :return: 1d array of Hamming distances between corresponding elements in a with the vector v
+    """
+    if np.array(a).shape[1] != np.array(v).shape[0]:
         return None
 
     distance_matrix = np.array([])
     for v in a:
-        ham = hamming(v, b)
+        ham = hamming(v, v)
         distance_matrix = np.append(distance_matrix, ham)
     return distance_matrix
 
 
 def predict(Xtest, targets, idx_train, avg_face, proj_data, w, distance_func=manhattan_distance, type="",
             sample_size=3, threshold=2):
+    """
+    Predicts ids for each of the images in Xtest
+    :param Xtest: An array of vectors representing images
+    :param targets: The target ids
+    :param idx_train: The indexes that correspond to the correct ids within the targets array
+    :param avg_face: The average face that has been calculated using the dataset
+    :param proj_data: The projection of the training images onto the eigenfaces
+    :param w: The weights for the projections
+    :param distance_func: Preferred distance measurement for measuring the distance between the test face weights and the projections' weights
+    :param type: The type of evaluation. "KNN" for K-nearest number evaluation of the face.
+    :param sample_size: If "KNN" type has been selected, this is the amount of nearest neighbours that are evaluated
+    :param threshold: The amount of identical ids required to identify a face
+    :return: An array of predicted ids. Each index corresponds the index in the Xtest array
+    """
     predicted_ids = []
     for test_index in range(len(Xtest)):
         unknown_face_vector = Xtest[test_index]
@@ -118,10 +191,26 @@ def predict(Xtest, targets, idx_train, avg_face, proj_data, w, distance_func=man
 
 
 def index_to_id(idx, idx_train, targets):
+    """
+    Finds the target id an index in idx_train represents
+    :param idx: The index for the element in idx_train that's id is to be retrieved
+    :param idx_train: A list of indexes that correspond to the ids of the test set
+    :param targets: The targets of the prediction
+    :return: Returns the id that represents the image in idx_train[idx]
+    """
     return targets[idx_train[idx]]
 
 
 def KNN_prediction(norms: np.array, sample_size: int, threshold: int, idx_train, targets):
+    """
+    K-nearest neighbour for predictions.
+    :param norms: The norms that determine which face is the closest to the test face
+    :param sample_size: The amount of neighbours to be evaluated
+    :param threshold: How many neighbours must be of the same id for the image to be identified
+    :param idx_train: An array of indexes that can be used to find the id of a given index in idx_train
+    :param targets: The targets for the prediction
+    :return: Returns the most common element in the nearest neighbours that passes the threshold. If no id passes the threshold, returns 0
+    """
     # Get indices of the smallest values in norms array
     indices = np.argpartition(norms, sample_size)[:sample_size]
 
@@ -139,6 +228,12 @@ def KNN_prediction(norms: np.array, sample_size: int, threshold: int, idx_train,
 
 
 def n_of_the_same(arr: list, n: int):
+    """
+    Returns an element if it appears n time within an array
+    :param arr: An iterable
+    :param n: The threshold for the times an item has to appear
+    :return: The item that appears the most times, passing the threshold. Otherwise None.
+    """
     # Check if the array is empty
     if len(arr) == 0:
         return None
